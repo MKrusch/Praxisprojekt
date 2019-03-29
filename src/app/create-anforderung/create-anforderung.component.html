@@ -1,0 +1,24 @@
+<div>
+  <label>Name:
+    <input [(ngModel)]="anforderung.name" placeholder="Name">
+  </label>
+</div>
+<div>
+  <label>Text:
+    <input [(ngModel)]="anforderung.text" placeholder="Text">
+  </label>
+</div>
+<div>
+  <label>Projekt:
+    <input [(ngModel)]="anforderung.project" placeholder="Projekt">
+  </label>
+</div>
+<div>
+  <label>Datum:
+    <input [(ngModel)]="anforderung.date" placeholder="Datum">
+  </label>
+</div>
+
+<button (click)="abschicken()">
+  Abschicken
+</button>

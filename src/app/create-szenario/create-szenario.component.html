@@ -1,0 +1,24 @@
+<div>
+  <label>Name:
+    <input [(ngModel)]="szenario.name" placeholder="Name">
+  </label>
+</div>
+<div>
+  <label>Text:
+    <input [(ngModel)]="szenario.text" placeholder="Text">
+  </label>
+</div>
+<div>
+  <label>Projekt:
+    <input [(ngModel)]="szenario.project" placeholder="Projekt">
+  </label>
+</div>
+<div>
+  <label>Datum:
+    <input [(ngModel)]="szenario.date" placeholder="Datum">
+  </label>
+</div>
+
+<button (click)="abschicken()">
+  Abschicken
+</button>

@@ -1,0 +1,31 @@
+ <div>
+    <label>Name:
+      <input [(ngModel)]="szenario.name" placeholder="Name">
+    </label>
+  </div>
+  <div>
+    <label>Text:
+      <input [(ngModel)]="szenario.text" placeholder="Text">
+    </label>
+  </div>
+  <div>
+    <label>Projekt:
+      <input [(ngModel)]="szenario.project" placeholder="Projekt">
+    </label>
+  </div>
+  <div>
+    <label>Datum:
+      <input [(ngModel)]="szenario.date" placeholder="Datum">
+    </label>
+  </div>
+  <button class="btn" routerLink="/overview"> Zurück </button>
+  <button class="btn" > Ändern </button>
+  <button class="btn" (click)="delete()"> Löschen </button>
+
+<div>
+  <p>Szenarios</p>
+  <ul *ngFor="let szenario of andereSzenarien$ | async" >
+    <li class="badge" routerLink="/detail_szenario/{{szenario.id}}">{{szenario.name}}</li> 
+  </ul>
+</div>
+

@@ -1,0 +1,65 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="grid-container">
+
+  <div class="grid-column">
+    <div>
+      <button (click)="szenarioSortieren('Name')"> nach Name sortieren </button>
+      <button (click)="szenarioSortieren('Datum')"> nach Datum sortieren </button>
+      <button (click)="szenarioSortieren('Projekt')">nach Projekt sortieren </button>
+      <button (click)="getAllArtefacts()"> zurücksetzen </button>
+    </div>
+    <div>
+      <input [(ngModel)]="query"> 
+      <button (click)="szenariosFiltern()"> anwenden </button>
+    </div>
+    <p>Szenarios</p>
+    <div *ngFor="let szenario of szenarios$ | async" (mouseenter)="enter(szenario)" (mouseleave)="leave(szenario)" >
+      <span class="badge" [ngClass]="{'highlight': szenario.highlighted==true}" routerLink="/detail_szenario/{{szenario.id}}">{{szenario.name}}</span> 
+    </div>
+  </div>
+
+  <div class="grid-column">
+      <div>
+          <button (click)="szenarioSortieren('Name')"> nach Name sortieren </button>
+          <button (click)="szenarioSortieren('Datum')"> nach Datum sortieren </button>
+          <button (click)="szenarioSortieren('Projekt')">nach Projekt sortieren </button>
+          <button (click)="getAllArtefacts()"> zurücksetzen </button>
+        </div>
+        <div>
+          <input> 
+          <button (click)="getAllArtefacts()"> zurücksetzen </button>
+        </div>
+    <p>Erfordernisse</p>
+    <div *ngFor="let erfordernis of erfordernisse$ | async" (mouseenter)="enter(erfordernis)" (mouseleave)="leave(erfordernis)">
+      <span class="badge" [ngClass]="{'highlight': erfordernis.highlighted==true}" routerLink="/detail_erfordernis/{{erfordernis.id}}">
+        {{erfordernis.name}}
+      </span> 
+    </div>
+  </div>
+
+  <div class="grid-column">
+    <div>
+      <button (click)="szenarioSortieren('Name')"> nach Name sortieren </button>
+      <button (click)="szenarioSortieren('Datum')"> nach Datum sortieren </button>
+      <button (click)="szenarioSortieren('Projekt')">nach Projekt sortieren </button>
+      <button (click)="getAllArtefacts()"> zurücksetzen </button>
+    </div>
+    <div>
+      <input> 
+      <button (click)="getAllArtefacts()"> zurücksetzen </button>
+    </div>
+    <p>Anforderungen</p>
+    <div *ngFor="let anforderung of anforderungen$ | async" (mouseenter)="enter(anforderung)" (mouseleave)="leave(anforderung)">
+      <span 
+        class="badge"
+        [ngClass]="{'highlight': anforderung.highlighted==true}"
+        routerLink="/detail_anforderung/{{anforderung.id}}"
+      >
+        {{anforderung.name}}
+      </span> 
+    </div>
+  </div>
+
+</div>
+
