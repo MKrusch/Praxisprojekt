@@ -21,3 +21,10 @@
 <button class="btn" routerLink="/overview"> Zurück </button>
 <button class="btn" (click)="change()"> Ändern </button>
 <button class="btn" (click)="delete()"> Löschen </button>
+
+<div>
+<p>Ähnliche Anforderungen:</p>
+<ul *ngFor="let anforderung of andereAnforderungen$ | async" >
+  <li class="badge" routerLink="/detail_anforderung/{{anforderung.id}}">{{anforderung.name}}</li> 
+</ul>
+</div>

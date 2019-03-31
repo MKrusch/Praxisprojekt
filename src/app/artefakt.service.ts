@@ -47,15 +47,15 @@ export class ArtefaktService {
 
     switch(chosenMode){
       case Modus.SORT_NAME: {
-        result = this.sortNames();
+        result = this.sortNames(3);
         break;
       }
       case Modus.SORT_PROJECT: {
-        result = this.sortProjects();
+        result = this.sortProjects(3);
         break;
       }
       case Modus.SORT_DATE: {
-        result = this.sortDates();
+        result = this.sortDates(3);
         break;
       }
       default:{
@@ -67,11 +67,67 @@ export class ArtefaktService {
     return result;
   }
 
+  getErfordernisse(chosenMode):Observable<Erfordernis[]>{
+    let result;
+
+    switch(chosenMode){
+      case Modus.SORT_NAME: {
+        result = this.sortNames(1);
+        break;
+      }
+      case Modus.SORT_PROJECT: {
+        result = this.sortProjects(1);
+        break;
+      }
+      case Modus.SORT_DATE: {
+        result = this.sortDates(1);
+        break;
+      }
+      default:{
+        result = this.alleErfordernisse;
+        break;
+      }
+    }
+
+    return result;
+  }
+
+  getAnforderungen(chosenMode):Observable<Anforderung[]>{
+    let result;
+
+    switch(chosenMode){
+      case Modus.SORT_NAME: {
+        result = this.sortNames(2);
+        break;
+      }
+      case Modus.SORT_PROJECT: {
+        result = this.sortProjects(2);
+        break;
+      }
+      case Modus.SORT_DATE: {
+        result = this.sortDates(2);
+        break;
+      }
+      default:{
+        result = this.alleAnforderungen;
+        break;
+      }
+    }
+
+    return result;
+  }
+
   sortingMode1 = 1;
-  private sortNames(){
+  private sortNames(mode){
     this.sortingMode1 *= -1;
 
     let temp = this.alleSzenarien;
+    if(mode === 1){
+      let temp = this.alleErfordernisse;
+    }else if(mode === 2){
+      let temp = this.alleAnforderungen;
+    }
+    
     temp = temp.pipe(
       map(array => {
         array.sort((a ,b) => {
@@ -86,10 +142,15 @@ export class ArtefaktService {
   }
 
   sortingMode2 = 1;
-  private sortProjects(){
+  private sortProjects(mode){
     this.sortingMode2 *= -1;
 
     let temp = this.alleSzenarien;
+    if(mode === 1){
+      let temp = this.alleErfordernisse;
+    }else if(mode === 2){
+      let temp = this.alleAnforderungen;
+    }
     temp = temp.pipe(
       map(array => {
         array.sort((a ,b) => {
@@ -104,10 +165,16 @@ export class ArtefaktService {
   }
 
   sortingMode3 = 1;
-  private sortDates(){
+  private sortDates(mode){
     this.sortingMode2 *= -1;
 
     let temp = this.alleSzenarien;
+    if(mode === 1){
+      let temp = this.alleErfordernisse;
+    }else if(mode === 2){
+      let temp = this.alleAnforderungen;
+    }
+
     temp = temp.pipe(
       map(array => {
         array.sort((a ,b) => {
@@ -122,7 +189,7 @@ export class ArtefaktService {
   }
 
   query;
-  filterSzenario(query){
+  filterSzenario(query, mode){
       
     function filterFunction(item) {
       if(item.name.includes(query)) return true;
@@ -130,6 +197,12 @@ export class ArtefaktService {
     }
 
     let temp = this.alleSzenarien;
+    if(mode === 1){
+      let temp = this.alleErfordernisse;
+    }else if(mode === 2){
+      let temp = this.alleAnforderungen;
+    }
+
     this.query = query;
     temp = temp.pipe(
       map(array => {

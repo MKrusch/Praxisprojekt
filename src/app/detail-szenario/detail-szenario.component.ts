@@ -33,7 +33,10 @@ export class DetailSzenarioComponent implements OnInit {
     let helper = szenario
     
     function filterFunction(item) {
-      if(item.project === helper.project) return true;
+      if(item.project === helper.project && !(item.id === helper.id)) {
+        return true;
+      }
+  
       return false;
     }
 
@@ -45,6 +48,7 @@ export class DetailSzenarioComponent implements OnInit {
     )
     this.andereSzenarien$ = temp;
   }
+  
   async getSzenario() {
     this.id = +this.route.snapshot.paramMap.get('id');
     let promise = await this.neohandler.getSpecificArtefact(this.id);
@@ -54,7 +58,6 @@ export class DetailSzenarioComponent implements OnInit {
   }
 
   async delete(){
-    console.log("Delete <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
     await this.neohandler.deleteArtefact(this.id);
     this.router.navigate(['/overview']);
   }

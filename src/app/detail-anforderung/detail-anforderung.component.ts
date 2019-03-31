@@ -7,6 +7,8 @@ import { Location } from '@angular/common';
 import { Anforderung } from '../Artefakte/Anforderung';
 import { NeohandlerService } from '../neohandler.service';
 import { Artefakt } from '../Artefakte/Artefakt';
+import { ArtefaktService } from '../artefakt.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-detail-anforderung',
@@ -15,15 +17,37 @@ import { Artefakt } from '../Artefakte/Artefakt';
 })
 export class DetailAnforderungComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute,private neohandler: NeohandlerService,private location: Location, private router: Router) { }
+  constructor(private route: ActivatedRoute,private neohandler: NeohandlerService,private location: Location, private router: Router, private artefactHandler: ArtefaktService) { }
 
   anforderung$: Observable<Anforderung>;
   anforderung: Artefakt;
+  andereAnforderungen$: Observable<Anforderung[]>;
   id;
 
   ngOnInit() {
     this.getAnforderung()
     console.log(this.id);
+  }
+
+  async getÄhnliche(erfordernis){
+    let promise = await this.artefactHandler.getSzenarien("");
+    let helper = erfordernis
+    
+    function filterFunction(item) {
+      if(item.project === helper.project && !(item.id === helper.id)) {
+        return true;
+      }
+  
+      return false;
+    }
+
+    let temp = promise.pipe(
+      map(array => {
+        array = array.filter(filterFunction);
+        return array;
+      })
+    )
+    this.andereAnforderungen$ = temp;
   }
 
   async getAnforderung() {

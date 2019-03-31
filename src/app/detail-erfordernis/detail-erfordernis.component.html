@@ -19,6 +19,13 @@
   </label>
 </div>
 <button class="btn" routerLink="/overview"> Zurück </button>
-<button class="btn" > Ändern </button>
+<button class="btn" (click)="change()"> Ändern </button>
 <button class="btn" (click)="delete()"> Löschen </button>
+
+<div>
+<p>Ähnliche Erfordernisse:</p>
+<ul *ngFor="let erfordernis of andereErfordernisse$ | async" >
+  <li class="badge" routerLink="/detail_erfordernis/{{erfordernis.id}}">{{erfordernis.name}}</li> 
+</ul>
+</div>
 
